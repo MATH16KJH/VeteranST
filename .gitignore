@@ -1,0 +1,16 @@
+# Large source objects are not committed (Zenodo); see data/real/README.md
+data/real/seurat/
+data/real/*.RData
+data/real/count_mat_*.csv
+data/simulated/*_regenerated.rds
+data/simulated/coordinates_simul.csv
+# Generated outputs
+results/*
+!results/.gitkeep
+# Shiny deployment metadata
+app/rsconnect/
+# R artefacts
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
