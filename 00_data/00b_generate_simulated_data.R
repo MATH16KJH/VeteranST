@@ -3,8 +3,8 @@
 # -----------------------------------------------------------------------------
 # PURPOSE
 #   Generate the synthetic spatial transcriptomics data used to evaluate the
-#   spatial gene co-expression (clustering) component (Supplementary Section S4,
-#   Figures S4, S5, S7 and the neighbourhood-size selection).
+#   spatial gene co-expression (clustering) component (Supplementary Section S4:
+#   Figures S8-S10 and Table S4; main-text Figure 2).
 #
 # DESIGN (Supplementary Section S4)
 #   * Reference: scDesign3 (Song et al., 2024) fitted to the 10x Visium mouse

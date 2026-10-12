@@ -29,7 +29,7 @@ preprocessing has to be re-run.
   samples; `$z` is the label vector above, `$coords` the spot coordinates used
   by BANYAN, `$bic` the BIC of the fit).
 * `annotations/clusters_br_annotation.csv` — the 20 manually annotated tissue
-  regions of the breast-cancer section (Yang et al., 2025), transferred to the
+  regions of the breast-cancer section (Xu et al., 2024), transferred to the
   Visium spots with the region-selection tool of the VeteranST application.
   Used for the application in the main text, not for the simulations. Spot
   identifiers are R-mangled (`-1` written as `.1`).

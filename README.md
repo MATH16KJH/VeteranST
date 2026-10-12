@@ -2,7 +2,7 @@
 
 Source code, test data and simulation studies of
 
-> Kim J, Jung K, Chung D, Shin S. **VeteranST: Transcriptional Variability and Gene
+> Kim J, Jung K, Shin J, Chung D, Shin S. **VeteranST: Transcriptional Variability and Gene
 > Co-Expression Analysis in Spatial Transcriptomics.** *Bioinformatics* (submitted).
 
 The repository has two parts:
@@ -11,8 +11,9 @@ The repository has two parts:
   <https://chunglab.bmi.osumc.edu/VeteranST>, with the example data it ships
   with. It runs locally with `shiny::runApp("app")`; see `app/README.md`.
 * **Simulation studies** (everything else) — stand-alone R scripts that
-  reproduce every figure and table of the Supplementary simulation studies
-  (Sections S1, S3 and S4), together with the exact input data they used.
+  reproduce every figure and table of the simulation studies (main-text
+  Section 4.1 and Figure 2; Supplementary Sections S1, S3 and S4), together
+  with the exact input data they used.
 
 Archived version of this repository used for the submission: **Zenodo DOI TODO**.
 
@@ -40,10 +41,10 @@ the simulation code below re-implements the same definitions.
 
 ## What reproduces what
 
-Figure and table numbers refer to the supplementary file. All outputs are
-written under `results/`.
+Figure and table numbers refer to the supplementary file unless marked
+"main text". All outputs are written under `results/`.
 
-| Supplementary item | Script | Main output |
+| Manuscript item | Script | Main output |
 |---|---|---|
 | Fig. S1, S3 – type I error of variance-homogeneity tests, α = 0.01 / 0.05 (Sec. S1.2–S1.3) | `S1_gene_level_type1_error/S1_type1_error_gene_level.R` (family `variance`) | `S1_gene_level_type1_error/<Test>/scatter_comparison_<Test>_<α>.jpg`, `comparison_hist_<Test>_<α>.jpg` |
 | Fig. S2, S4 – type I error of mean-comparison tests, α = 0.01 / 0.05 (Sec. S1.2, S1.4) | same script (family `mean`) | `S1_gene_level_type1_error/ANOVA/…`, `Kruskal_Wallis/…` |
@@ -57,8 +58,8 @@ written under `results/`.
 | Fig. S8(b) – consensus vs. equal-weight aggregation, 2–5 measures (Sec. S4.1) | `S4_spatial_coexpression/S4b_consensus_vs_equal_weight.R` | `S4b_consensus_vs_equal_weight/all_ari.jpg` |
 | Fig. S9 – ARI of consensus clustering by number of measures (Sec. S4.1) | `S4_spatial_coexpression/S4c_measure_combination_selection.R` | `S4c_measure_combination_selection/consensus_analysis_by_n_measures.jpg`, `consensus_combinations.csv` |
 | Table S4 – neighbourhood size (Sec. S4.1) | `S4_spatial_coexpression/S4d_neighborhood_size_selection.R` | `S4d_neighborhood_size_selection/neighbor_comparison_4measures.csv` (Welch tests printed to the console) |
-| Fig. S10(a–c) – accuracy, stability and run time of clustering methods (Sec. S4.2) | `S4_spatial_coexpression/S4e_benchmark_clustering_methods.R` | `S4e_benchmark_clustering_methods/ari_comparison.jpg`, `stability_comparison.jpg`, `time_comparison.jpg` |
-| Fig. S11 – BANYAN tissue domains (Sec. S6) | not a simulation; the fits are in `data/real/banyan/` (see `00_data/00a_prepare_real_data.R`) | — |
+| Main-text Fig. 2(a, b) – accuracy and stability of clustering methods; Fig. S10 – run time (main-text Sec. 4.1, Sec. S4.2) | `S4_spatial_coexpression/S4e_benchmark_clustering_methods.R` | `S4e_benchmark_clustering_methods/ari_comparison.jpg`, `stability_comparison.jpg`, `time_comparison.jpg` |
+| Fig. S11 – BANYAN tissue domains (Sec. S5) | not a simulation; the fits are in `data/real/banyan/` (see `00_data/00a_prepare_real_data.R`) | — |
 
 ## Repository layout
 
@@ -80,7 +81,7 @@ written under `results/`.
 │   └── 00c_export_app_test_input.R      real dataset -> CSV input for the web app
 ├── S1_gene_level_type1_error/           Section S1  (Figs S1–S4)
 ├── S3_domain_variability_type1_error/   Section S3  (Tables S1–S3, Figs S5–S7)
-├── S4_spatial_coexpression/             Section S4  (Figs S8–S10, Table S4)
+├── S4_spatial_coexpression/             Section S4  (Figs S8–S10, Table S4; main-text Fig. 2)
 ├── data/
 │   ├── real/                            count_mat_*.rda, clusters_*.csv, coordinates_*.csv,
 │   │                                    banyan/, annotations/ (see data/real/README.md)

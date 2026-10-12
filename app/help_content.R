@@ -16,7 +16,7 @@
 ## =============================================================================
 
 help_version   <- "1.0.0"                 # ★ 앱 버전 (Zenodo release 와 맞추기)
-help_github    <- "https://github.com/XXXXX/VeteranST"   # ★
+help_github    <- "https://github.com/MATH16KJH/VeteranST"
 help_zenodo    <- "https://doi.org/10.5281/zenodo.XXXXX" # ★
 help_runtime   <- "approximately XX minutes on the public server (16,074 genes x 1,650 spots)"  # ★
 
@@ -333,13 +333,13 @@ help_content$reproduce <- list(
       tags$li("Data Upload → ", strong("Load Example Data"), ". The four BANYAN domains of the P16 section are loaded: Domain 2 = tumour, Domains 3 and 4 = peritumoral inflamed tissue, Domain 1 = blood."),
       tags$li("Test for DVGs → keep FWER Threshold = 0.01 and ", em("Predefined Tissue Domain"), " → ", strong("Test Start!"),
               ". The DVG-only list contains 25 genes, including ", em("HLA-C"), ", ", em("TAP1"), " and ", em("PSME2"),
-              " (Figure 2c of the paper)."),
+              " (Figure 3c of the paper)."),
       tags$li("Spatial Domain Variability Testing → keep the significance level at 0.01 → ", strong("Run Analysis"),
-              ". The tumour domain (Domain 2) ranks first, followed by the inflamed domains (3, 4) and blood (1); the critical difference diagram corresponds to Figure 2b."),
+              ". The tumour domain (Domain 2) ranks first, followed by the inflamed domains (3, 4) and blood (1); the critical difference diagram corresponds to Figure 3b."),
       tags$li("Spatial Gene Co-expression Analysis → set ", strong("Number of Top DVGs = 1,000"), " and ", strong("Min Module Size = 5"), " → ",
               strong("Run Clustering"), ". Search ", em("TAP1"), " in ", em("Find Gene's Module"), ": its module contains ",
               em("PSME2"), ", ", em("HLA-DRA"), ", ", em("HLA-DRB1"), ", ", em("HLA-DPA1"), ", ", em("HLA-DPB1"), ", ",
-              em("CD74"), ", ", em("IFI30"), ", ", em("TAPBP"), " and ", em("PSMB9"), " (Figure 3).")
+              em("CD74"), ", ", em("IFI30"), ", ", em("TAPBP"), " and ", em("PSMB9"), " (Figure 4).")
     ),
     p("Expected running time of the full pipeline: ", help_runtime, "."),
     help_note("Module membership can differ marginally between runs because of the random steps in HNSW and Leiden; ",
@@ -399,13 +399,13 @@ help_content$faq <- list(
 help_content$about <- list(
   title = "Citation, source code and contact",
   body = tagList(
-    p(strong("Citation. "), "Kim J, Jung K, Chung D, Shin S. VeteranST: Transcriptional Variability and Gene Co-Expression Analysis ",
+    p(strong("Citation. "), "Kim J, Jung K, Shin J, Chung D, Shin S. VeteranST: Transcriptional Variability and Gene Co-Expression Analysis ",
       "in Spatial Transcriptomics. ", em("Bioinformatics"), " (submitted)."),     # ★ 게재 후 갱신
     p(strong("Source code and test data. "), tags$a(href = help_github, target = "_blank", help_github),
-      " (open-source licence: XXXXX ★). The version described in the paper is archived at ",
+      " (open-source licence: MIT). The version described in the paper is archived at ",
       tags$a(href = help_zenodo, target = "_blank", help_zenodo), "."),
     p(strong("Example data. "), "Human melanoma brain metastasis, 10x Visium, sample P16 (Sudmeier ", em("et al."),
-      ", 2022; GEO accession ★GSExxxxxx). Tissue domains were detected with BANYAN (Xie ", em("et al."), ", 2024)."),
+      ", 2022; GEO accession GSE179572). Tissue domains were detected with BANYAN (Xie ", em("et al."), ", 2024)."),
     p(strong("Contact and support. "), "Dongjun Chung (", tags$a(href = "mailto:chung.911@osu.edu", "chung.911@osu.edu"), ") and Sunyoung Shin (",
       tags$a(href = "mailto:sunyoungshin@postech.ac.kr", "sunyoungshin@postech.ac.kr"), "). ",
       "Bug reports and feature requests are welcome through the GitHub issue tracker. ",

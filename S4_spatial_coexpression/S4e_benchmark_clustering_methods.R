@@ -1,14 +1,15 @@
 # =============================================================================
 # S4e_benchmark_clustering_methods.R
-# Supplementary Section S4.2, Figure S10: proposed graph-based consensus
-# clustering vs. alternative gene-clustering approaches
+# Main-text Section 4.1 (Figure 2) and Supplementary Section S4.2 (Figure S10):
+# proposed graph-based consensus clustering vs. alternative gene-clustering
+# approaches
 # -----------------------------------------------------------------------------
 # WHAT IS SIMULATED
 #   Every method is run N_RUNS times (different seeds) on the scDesign3
 #   benchmark (10 true modules x 10 genes) and evaluated by
-#     (a) accuracy      ARI vs. ground truth, mean +/- SD over runs  (Fig S10a)
-#     (b) stability     mean pairwise ARI between the N_RUNS partitions (Fig S10b)
-#     (c) computation   total wall-clock time of the N_RUNS runs      (Fig S10c)
+#     (a) accuracy      ARI vs. ground truth, mean +/- SD over runs  (main-text Fig 2a)
+#     (b) stability     mean pairwise ARI between the N_RUNS partitions (main-text Fig 2b)
+#     (c) computation   total wall-clock time of the N_RUNS runs      (Fig S10)
 #
 # METHODS (category)
 #   Correlation Graph   (A) single metric: Leiden on (1+Pearson)/2, raw expression
@@ -26,9 +27,9 @@
 #                           -> strict consensus (R/utils_spatial_similarity.R)
 #
 # OUTPUTS  results/S4e_benchmark_clustering_methods/
-#   ari_comparison.jpg          mean ARI +/- SD per method (Fig S10a)
-#   stability_comparison.jpg    mean pairwise ARI +/- SD (Fig S10b)
-#   time_comparison.jpg         total run time per method (Fig S10c)
+#   ari_comparison.jpg          mean ARI +/- SD per method (main-text Fig 2a)
+#   stability_comparison.jpg    mean pairwise ARI +/- SD (main-text Fig 2b)
+#   time_comparison.jpg         total run time per method (Fig S10)
 #   comparison_results.csv, run_details.csv, stability_results.csv, timing_results.csv
 #
 # INPUTS   data/simulated/{count_mat_simul,coordinates_simul}.rds (00b)

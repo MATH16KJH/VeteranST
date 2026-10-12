@@ -10,7 +10,7 @@ application locally or deploy it on your own Shiny Server.
 | File | Content |
 |---|---|
 | `app.R` | The application: UI and server (data upload, tissue-domain assignment, DVG test, spatial domain variability test, spatial gene co-expression analysis). |
-| `help_content.R` | Help & Tutorial tab and the per-step "?" pop-ups; sourced by `app.R`. The values marked `★` (GitHub URL, Zenodo DOI, runtime, version, GEO accession, licence) must be filled in before release. |
+| `help_content.R` | Help & Tutorial tab and the per-step "?" pop-ups; sourced by `app.R`. The values still marked `★` (Zenodo DOI, runtime, version) must be filled in before release. |
 | `test_data/count_mat_p16.rda` | Example expression matrix (`count_mat_p16`, 16,074 genes × 1,650 spots, SCTransform-normalised log values = `data` slot of the Seurat `SCT` assay); identical to `data/real/count_mat_p16.rda`. |
 | `test_data/coordinates_p16.rda` | Example spot coordinates (`coordinates_p16`, `imagerow`/`imagecol` from `Seurat::GetTissueCoordinates()`). |
 | `test_data/clusters_p16.rds` | Example BANYAN tissue-domain labels (named integer vector, 4 domains of 311/609/321/409 spots). |

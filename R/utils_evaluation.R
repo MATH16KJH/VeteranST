@@ -61,7 +61,7 @@ evaluate_clustering <- function(pred_labels, ground_truth) {
 }
 
 #' Mean pairwise ARI between all pairs of clusterings in `label_list`
-#' (clustering stability; Supplementary Figure S10b).
+#' (clustering stability; main-text Figure 2b).
 pairwise_stability <- function(label_list) {
   n <- length(label_list)
   if (n < 2) return(list(mean = NA_real_, sd = NA_real_, values = numeric(0)))
