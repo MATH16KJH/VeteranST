@@ -37,6 +37,64 @@ graph with disparity filter, four similarity measures on 37-spot smoothed
 data, strict four-way Leiden consensus) are summarised in `app/README.md`;
 the simulation code below re-implements the same definitions.
 
+## Tutorial: reproducing the application results of the paper
+
+The steps below reproduce the melanoma brain metastasis analysis of the main
+text (Section 4.2, Figures 3 and 4) with the example data that ship with the
+application. They work the same way on the public server
+(<https://chunglab.bmi.osumc.edu/VeteranST>) and on a local copy
+(`shiny::runApp("app")`). The same walk-through, together with the input file
+formats, a parameter reference and troubleshooting notes, is available inside
+the application under **Help & Tutorial**.
+
+1. **Data Upload** → press **Load Example Data**. This loads section P16
+   (16,074 genes × 1,650 spots, SCTransform-normalised values) with its four
+   BANYAN tissue domains: Domain 2 = tumour, Domains 3 and 4 = peritumoral
+   inflamed tissue, Domain 1 = blood.
+2. **Test for DVGs** → keep *FWER Threshold* = 0.01 and *Predefined Tissue
+   Domain* → **Test Start!**. The Brown–Forsythe test is run for every gene
+   (a few minutes). The *DVG-only genes* tab lists 25 genes, including
+   *HLA-C*, *TAP1* and *PSME2* (Figure 3c).
+3. **Spatial Domain Variability Testing** → keep the significance level at
+   0.01 → **Run Analysis**. The tumour domain (Domain 2) ranks first, followed
+   by the inflamed domains (3, 4) and blood (1); the variability map and the
+   critical difference diagram correspond to Figure 3b. **Download
+   Variability Results** exports both images (PNG) together with the domain
+   ranking, the Friedman test summary and the Nemenyi pairwise comparisons
+   (CSV); the diagram and the Nemenyi table are included when the Friedman
+   test is significant, as it is here.
+4. **Spatial Gene Co-expression Analysis** → set *Number of Top DVGs* = 1,000
+   and *Min Module Size* = 5 → **Run Clustering**. Type *TAP1* in *Find
+   Gene's Module*: its module contains *PSME2*, *HLA-DRA*, *HLA-DRB1*,
+   *HLA-DPA1*, *HLA-DPB1*, *CD74*, *IFI30*, *TAPBP* and *PSMB9* (Figure 4).
+
+Notes
+
+* **Your own data.** Upload a genes × spots expression matrix and a spot
+  coordinate file as CSV, and optionally a domain label file; the layouts are
+  described under *Input files* in the Help tab. The application does not
+  normalise the data (the paper used SCTransform-normalised values).
+  `00_data/00c_export_app_test_input.R` writes any of the three real datasets
+  in exactly this layout.
+* **Breast cancer analysis (main-text Section 4.3).** Export the dataset with
+  `Rscript 00_data/00c_export_app_test_input.R BR data/app_test_input`, upload
+  the two CSV files, and upload
+  `data/real/annotations/clusters_br_annotation.csv` (the 20 annotated
+  regions, in the spot order of the matrix) as the domain label file, then
+  choose *Predefined Tissue Domain* in STEP 3. Labels are matched to spots by
+  position, so the notice about non-matching spot IDs (`-1` is written as
+  `.1` in that file) can be ignored. The paper used *FWER Threshold* = 0.01,
+  a significance level of 0.01 and *Number of Top DVGs* = 5,000.
+* **Reproducibility.** STEP 3 and STEP 4 are deterministic. STEP 5 uses HNSW
+  and Leiden, which contain random steps, so module membership can differ
+  marginally between runs; the antigen-presentation core of the *TAP1* module
+  is stable.
+* **Consistency between steps.** Changing the domain assignment or the domain
+  criterion clears the results of STEP 3–5, and whenever the STEP 3 results
+  change (for example after rerunning it with a different FWER threshold) the
+  results of STEP 4–5 are cleared, so the downstream steps always have to be
+  rerun on the current DVG list.
+
 # Simulation studies
 
 ## What reproduces what
@@ -224,9 +282,9 @@ use dense matrices, which is sufficient for the 100-gene benchmark.
 
 The scripts consolidate the development code used for the submission (one
 script per figure/table instead of several overlapping files). The statistical
-definitions, parameter values, seeds where they existed, and output file names
-were kept unchanged; only the code organisation, parallelisation and plotting
-boilerplate differ. Exploratory analyses that preceded the final design and
+definitions, parameter values and seeds (where they existed) were kept
+unchanged; only the code organisation, parallelisation, plotting boilerplate
+and the names of some output files differ. Exploratory analyses that preceded the final design and
 are not reported in the manuscript are not included.
 
 ## License and citation

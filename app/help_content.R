@@ -1,21 +1,21 @@
 ## =============================================================================
-## help_content.R -- VeteranST Help & Tutorial 탭 + STEP 별 "?" 팝업 콘텐츠
+## help_content.R -- VeteranST Help & Tutorial tab and the per-step "?" pop-up content
 ##
-##   app.R 과 같은 폴더에 두고, app.R 에서  source("help_content.R", local = TRUE, encoding = "UTF-8")
-##   로 불러오기.
+##   Keep this file in the same folder as app.R, which loads it with
+##   source("help_content.R", local = TRUE, encoding = "UTF-8").
 ##
-##   정의되는 것
-##     help_css          스타일
-##     step_header()     사이드바의 "STEP n." 제목 + ? 링크  (기존 tags$h4 대체)
-##     help_content      섹션별 title / body  (Help 탭과 ? 모달이 공유)
+##   Defines
+##     help_css          styles
+##     step_header()     sidebar "STEP n." heading with a "?" link (replaces the former tags$h4)
+##     help_content      title / body of every section (shared by the Help tab and the "?" modals)
 ##     help_tab_ui()     Help & Tutorial tabPanel
-##     help_modal()      ? 클릭 시 열리는 모달
+##     help_modal()      modal opened by clicking "?"
 ##
-##   용어: tissue domain = "Domain", gene module = "Module" (app.R 의 UI 문자열과 동일)
-##   ★ 표시된 곳은 제출 전에 채워야 하는 값 (URL, DOI, runtime, 버전).
+##   Terminology: tissue domain = "Domain", gene module = "Module" (same as the UI strings in app.R)
+##   Values marked ★ must be filled in before release (Zenodo DOI, runtime, version).
 ## =============================================================================
 
-help_version   <- "1.0.0"                 # ★ 앱 버전 (Zenodo release 와 맞추기)
+help_version   <- "1.0.0"                 # ★ app version (keep in sync with the Zenodo release)
 help_github    <- "https://github.com/MATH16KJH/VeteranST"
 help_zenodo    <- "https://doi.org/10.5281/zenodo.XXXXX" # ★
 help_runtime   <- "approximately XX minutes on the public server (16,074 genes x 1,650 spots)"  # ★
@@ -51,7 +51,7 @@ help_css <- "
 "
 
 ## -----------------------------------------------------------------------------
-## 작은 헬퍼
+## Small helpers
 ## -----------------------------------------------------------------------------
 step_header <- function(text, step_id) {
   tags$h4(
@@ -78,7 +78,7 @@ help_tip  <- function(...) div(class = "help-tip", ...)
 help_mono <- function(text) div(class = "help-mono", text)
 
 ## -----------------------------------------------------------------------------
-## 콘텐츠
+## Content
 ## -----------------------------------------------------------------------------
 help_content <- list()
 
@@ -105,8 +105,9 @@ help_content$overview <- list(
     ),
     p("Two words are used consistently throughout the app: a ", strong("domain"), " is a region of tissue (STEP 2-4), ",
       "and a ", strong("module"), " is a group of genes with a shared spatial expression pattern (STEP 5)."),
-    p("Results propagate downstream: changing the domain assignment, the domain criterion or the FWER threshold ",
-      "clears the results of STEP 3-5 so that they can be rerun consistently."),
+    p("Results stay consistent across tabs: changing the domain assignment or the domain criterion clears the results ",
+      "of STEP 3-5, and whenever the STEP 3 results change (for example after rerunning it with a different FWER ",
+      "threshold) the results of STEP 4-5 are cleared, so that the downstream steps are always rerun on the current DVG list."),
     help_tip(strong("Quick start. "), "Data Upload → ", em("Load Example Data"), " → Test for DVGs → ",
              em("Test Start!"), " → Spatial Domain Variability Testing → ", em("Run Analysis"),
              " → Spatial Gene Co-expression Analysis → ", em("Run Clustering"), ". ",
@@ -240,7 +241,8 @@ help_content$step4 <- list(
       tags$li(strong("Tissue Domain Variability map"), ": spots are coloured by the mean rank of their domain (yellow = most variable, purple = least). Hover a spot to see its domain and rank; click a card in ", em("Variability Ranking"), " to highlight that domain."),
       tags$li(strong("Variability Ranking"), " cards: overall rank and mean rank of each domain (lower mean rank = higher variability)."),
       tags$li(strong("Critical Difference Diagram"), ": domains are placed on the ", em("Mean Rank"), " axis, most variable on the left. The short bar labelled CD shows the critical difference. ",
-              strong("Red horizontal bars connect domains that are not significantly different"), " from each other; domains not joined by a red bar differ significantly at the chosen α. The diagram is drawn only when the Friedman test is significant.")
+              strong("Red horizontal bars connect domains that are not significantly different"), " from each other; domains not joined by a red bar differ significantly at the chosen α. The diagram is drawn only when the Friedman test is significant."),
+      tags$li(strong("Download Variability Results"), " (shown once the analysis has run) exports a ZIP file with the variability map (PNG), the domain ranking and the Friedman test summary (CSV) and, when the Friedman test is significant, the critical difference diagram (PNG) and the Nemenyi pairwise comparisons (CSV).")
     ),
     help_note(strong("Interpretation caveat. "), "Because the test is run on genes that were themselves selected for ",
               "differential variability, the Friedman p-value is a conditional summary of how systematically variability ",
@@ -400,7 +402,7 @@ help_content$about <- list(
   title = "Citation, source code and contact",
   body = tagList(
     p(strong("Citation. "), "Kim J, Jung K, Shin J, Chung D, Shin S. VeteranST: Transcriptional Variability and Gene Co-Expression Analysis ",
-      "in Spatial Transcriptomics. ", em("Bioinformatics"), " (submitted)."),     # ★ 게재 후 갱신
+      "in Spatial Transcriptomics. ", em("Bioinformatics"), " (submitted)."),     # ★ update after publication
     p(strong("Source code and test data. "), tags$a(href = help_github, target = "_blank", help_github),
       " (open-source licence: MIT). The version described in the paper is archived at ",
       tags$a(href = help_zenodo, target = "_blank", help_zenodo), "."),
@@ -415,7 +417,7 @@ help_content$about <- list(
 )
 
 ## -----------------------------------------------------------------------------
-## Help & Tutorial 탭
+## Help & Tutorial tab
 ## -----------------------------------------------------------------------------
 help_tab_ui <- function() {
   sections <- c(overview = "Overview", inputs = "Input files",
@@ -451,7 +453,7 @@ help_tab_ui <- function() {
 }
 
 ## -----------------------------------------------------------------------------
-## "?" 모달
+## "?" modal
 ## -----------------------------------------------------------------------------
 help_modal <- function(section) {
   sec <- help_content[[section]]

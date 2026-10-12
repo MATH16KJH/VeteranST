@@ -49,6 +49,16 @@ same definitions (see `R/utils_spatial_similarity.R`).
 | Similarity measures | on the 37-spot smoothed data: Pearson of local means (negative values clipped to 0), Hotspot Jaccard (top 10 % local mean), High-/Low-variability Jaccard (top / bottom 10 % local variance) |
 | Consensus | Leiden (`cluster_leiden(objective_function = "modularity", resolution = 1)`, igraph ≥ 1.3) on each of the four graphs; genes linked only if co-clustered in all four; modules = connected components; minimum module size filter |
 
+## Tutorial and downloads
+
+A step-by-step walk-through that reproduces the results of the paper with the
+example data is given in the top-level `README.md` (section *Tutorial*) and in
+the **Help & Tutorial** tab of the application. Every analysis tab has its own
+download: domain assignments (CSV), DVG tables (CSV), per-gene maps and
+statistics (PNG + XLSX), the variability map, critical difference diagram and
+test tables of the spatial domain variability test (PNG + CSV), and the module
+network and module memberships (PNG + XLSX).
+
 ## Deployment notes
 
 * Upload limit is set to 1 GB (`options(shiny.maxRequestSize)`); adjust to the

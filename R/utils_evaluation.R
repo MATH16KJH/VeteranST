@@ -7,8 +7,9 @@
 #   evaluate_clustering()             ARI (and NMI) of a clustering vs. truth
 #   pairwise_stability()              mean pairwise ARI over repeated runs
 #   save_figure()                     ggsave wrapper (300 dpi JPEG by default)
-# NOTE: NMI is computed and written to the CSV outputs for completeness, but
-# only ARI is reported in the manuscript.
+# NOTE: NMI is computed alongside ARI and written to the CSV outputs. All
+# figures of the manuscript report ARI; NMI appears only in Supplementary
+# Table S4 (neighbourhood-size selection, S4d).
 # =============================================================================
 
 suppressPackageStartupMessages({

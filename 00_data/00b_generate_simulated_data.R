@@ -64,9 +64,12 @@ dir.create(OUT_DIR, showWarnings = FALSE, recursive = TRUE)
 # ---- reference data ----------------------------------------------------------
 example_sce <- readRDS(url(REFERENCE_URL))
 print(example_sce)
-# TODO (authors): confirm the gene selection. The original run used the first
-# N_GENES rows of the example object; the manuscript describes them as
-# "10 highly variable genes" of the mouse brain data.
+# Gene selection: the first N_GENES rows of the scDesign3 Visium example object,
+# exactly as in the scDesign3 spatial vignette ("we subset the top 10 genes").
+# The example object holds 1,000 genes that the scDesign3 authors pre-selected
+# as the top spatially variable genes of the section, so the ten reference genes
+# of the benchmark are its first ten spatially variable genes (Calb2, Gng4, Ttr,
+# S100a5, Nrgn, Doc2g, Ppp1r1b, Pcbp3, Fabp7, Gpsm1).
 example_sce <- example_sce[seq_len(N_GENES), ]
 
 # ---- simulate ----------------------------------------------------------------
